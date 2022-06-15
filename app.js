@@ -10,6 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const colors = ['orange', 'red', 'purple', 'green', 'brown'];
 
+  //Nav buttons
+  const leftBtn = document.querySelector('#left-button');
+  const rightBtn = document.querySelector('#right-button');
+  const downBtn = document.querySelector('#down-button');
+  const rotateBtn = document.querySelector('#rotate-button');
+
   //The Tetrominoes
   const lTetromino = [
     [1, width + 1, width * 2 + 1, 2],
@@ -23,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
     [width * 2, width * 2 + 1, width + 1, width + 2],
     [0, width, width + 1, width * 2 + 1],
   ];
-
   const tTetromino = [
     [1, width, width + 1, width + 2],
     [1, width + 1, width * 2 + 1, width + 2],
@@ -96,6 +101,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   document.addEventListener('keyup', control);
+
+  //Functionalities on button press
+  leftBtn.addEventListener('click', moveLeft);
+  rightBtn.addEventListener('click', moveRight);
+  downBtn.addEventListener('click', moveDown);
+  rotateBtn.addEventListener('click', rotate);
 
   //Move Down tetromino
   function moveDown() {
@@ -283,9 +294,13 @@ document.addEventListener('DOMContentLoaded', () => {
         squares[currentPosition + index].classList.contains('taken')
       )
     ) {
-      scoreDisplay.innerHTML = 'end';
+      // scoreDisplay.innerHTML = 'end';
       clearInterval(timerId);
       document.removeEventListener('keyup', control);
+      leftBtn.removeEventListener('click', moveLeft);
+      rightBtn.removeEventListener('click', moveRight);
+      downBtn.removeEventListener('click', moveDown);
+      rotateBtn.removeEventListener('click', rotate);
     }
   }
 });
